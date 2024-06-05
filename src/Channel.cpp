@@ -1,6 +1,5 @@
 #include "../include/Channel.hpp"
 
-// Kanal sınıfının yapıcı fonksiyonu
 Channel::Channel(const string& channelName, const string& channelKey, Client* channelOwner)
 	: _channelName(channelName),
 	  _channelOwner(channelOwner),
@@ -11,12 +10,10 @@ Channel::Channel(const string& channelName, const string& channelKey, Client* ch
 {
 }
 
-// Kanal sınıfının yıkıcı fonksiyonu
 Channel::~Channel()
 {
 }
 
-// Kanala mesajı yayınlayan fonksiyon
 void Channel::broadcastMessage(const string& message) const
 {
 	string tmp = message;
@@ -26,7 +23,6 @@ void Channel::broadcastMessage(const string& message) const
 	}
 }
 
-// Belirli bir istemici hariç tutarak kanala mesajı yayınlayan fonksiyon
 void Channel::broadcastMessage(const string& message, Client* exceptClient) const
 {
 	for (vector<Client*>::const_iterator it = _clients.begin(); it != _clients.end(); ++it)
@@ -36,7 +32,6 @@ void Channel::broadcastMessage(const string& message, Client* exceptClient) cons
 	}
 }
 
-// Kanala istemci ekleyen fonksiyon
 void Channel::addClient(Client* client)
 {
 	_clients.push_back(client);
@@ -62,7 +57,6 @@ void Channel::removeUserFromChannel(Client* client)
 				return;
 		}
 
-		// Eğer kanalda hala istemci varsa, ilk istemciyi yeni operatör yap.
 		if (_clients.size() > 0)
 		{
 			Client* newOperator = _clients.front();
@@ -76,7 +70,6 @@ void Channel::removeUserFromChannel(Client* client)
 	}
 }
 
-// Bir istemcinin kanalda olup olmadığını kontrol eden fonksiyon
 bool Channel::isUserOnChannel(Client* client) const
 {
 	for (vector<Client*>::const_iterator it = _clients.begin(); it != _clients.end(); ++it)
@@ -87,7 +80,6 @@ bool Channel::isUserOnChannel(Client* client) const
 	return false;
 }
 
-// Kanalın modlarını ayarlayan fonksiyon
 void Channel::setUpModeChannel(Channel* channel, Client* client, string& mode, string& modeParams)
 {
 	if (!channel || !client)
@@ -137,7 +129,6 @@ void Channel::setUpModeChannel(Channel* channel, Client* client, string& mode, s
 	}
 }
 
-// Kanalın düşük modlarını ayarlayan fonksiyon
 void Channel::setLowModeChannel(Channel* channel, Client* client, string& mode, string& modeParams)
 {
 	if (!channel || !client)
@@ -188,7 +179,6 @@ void Channel::setLowModeChannel(Channel* channel, Client* client, string& mode, 
 		client->sendMessage(":" + client->getHostName() + " 501 " + client->getNickName() + " :Unknown MODE flag");
 }
 
-// Kanaldaki istemcilerin nickName'lerini içeren vektörü döndüren fonksiyon
 std::vector<std::string> Channel::getChannelClientNickNames() const
 {
 	vector<string> nickNames;

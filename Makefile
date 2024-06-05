@@ -9,7 +9,6 @@ SRC			=	main.cpp src/Server.cpp src/Client.cpp src/Channel.cpp src/SrvUtils.cpp 
 				src/Commands/Pass.cpp src/Commands/Nick.cpp src/Commands/Cap.cpp src/Bot.cpp \
 
 OBJ			= $(SRC:src/%.cpp=obj/%.o)
-#OBJCOM		= $(SRC:src/Commands/%.cpp=obj/%.o)
 
 all			: $(NAME)
 

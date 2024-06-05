@@ -29,9 +29,9 @@ class Server
 {
 	private:
 		int _serverSocketFD;
-		const int _serverSocketFamily; // IPV4 V6 etc..
-		const int _serverSocketProtocol; // TCP/IP - UDP
-		const int _serverSocketPort; // 1234 2345 etc..
+		const int _serverSocketFamily;
+		const int _serverSocketProtocol;
+		const int _serverSocketPort;
 		string _serverName;
 		string	_serverPass;
 

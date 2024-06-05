@@ -1,6 +1,5 @@
 #include "../include/Bot.hpp"
 
-// Bot sınıfının yapıcı fonksiyonu
 Bot::Bot(const string &serv, int port, const string &pass)
 	: serv(serv),
 	  port(port),
@@ -12,13 +11,11 @@ Bot::Bot(const string &serv, int port, const string &pass)
 	connectServ();
 }
 
-// Bot sınıfının yıkıcı fonksiyonu
 Bot::~Bot()
 {
 	close(sock);
 }
 
-// Sunucuya bağlanan fonksiyon
 void Bot::connectServ()
 {
 	struct sockaddr_in server_addr;
@@ -56,7 +53,6 @@ void Bot::connectServ()
 	}
 }
 
-// Sunucudan gelen mesajları dinleyen fonksiyon
 void Bot::listen()
 {
 	const int BUFFER_SIZE = 1024;
@@ -88,7 +84,6 @@ void Bot::listen()
 	}
 }
 
-// Gelen mesajları işleyen fonksiyon
 void Bot::processMessage(const string &msg)
 {
 	if (msg.find("PRIVMSG") != string::npos)
@@ -108,19 +103,17 @@ void Bot::processMessage(const string &msg)
 			}
 
 			if (msg.find("amk") != string::npos)
-				sendMsg(senderNick, "Saygılı ol lütfen  " + senderNick + "!");
+				sendMsg(senderNick, "Please be respectful  " + senderNick + "!");
 		}
 	}
 }
 
-// Kanala mesaj gönderen fonksiyon
 void Bot::sendMsg(const string &channel, const string &message)
 {
 	string fullMessage = "PRIVMSG " + channel + " :" + message + "\r\n";
 	send(sock, fullMessage.c_str(), fullMessage.length(), 0);
 }
 
-// Sunucuya kayıt mesajı gönderen fonksiyon
 void Bot::sendRegMsg(const string &message)
 {
 	send(sock, message.c_str(), message.length(), 0);

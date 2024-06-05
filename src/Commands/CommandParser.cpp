@@ -1,6 +1,5 @@
 #include "../../include/Commands.hpp"
 
-// String başındaki ve sonundaki boşlukları temizleyen fonksiyon
 string strim(const string &str)
 {
     size_t first = str.find_first_not_of(' ');
@@ -12,18 +11,16 @@ string strim(const string &str)
     return str.substr(first, (last - first + 1));
 }
 
-// String başındaki ve sonundaki boşlukları temizleyen fonksiyon (diğer bir implementasyon)
 string atrim(const std::string &str)
 {
     const std::string whitespace = " \t\n\r\f\v";
     size_t start = str.find_first_not_of(whitespace);
     if (start == std::string::npos)
-        return ""; // String sadece beyaz boşluktan oluşuyorsa
+        return "";
     size_t end = str.find_last_not_of(whitespace);
     return str.substr(start, end - start + 1);
 }
 
-// Vector<string> elemanlarını birleştiren fonksiyon
 string mergeString(const vector<string> &parts, const string &delimiter)
 {
     string result;
@@ -38,7 +35,6 @@ string mergeString(const vector<string> &parts, const string &delimiter)
     return result;
 }
 
-// String'i belirli bir ayraçla bölen ve parçalara ayıran fonksiyon
 vector<string> splitString(string str, const string &delimiter)
 {
     vector<string> parts;
@@ -54,7 +50,6 @@ vector<string> splitString(string str, const string &delimiter)
     return parts;
 }
 
-// CommandParser sınıfının komutları işleyen fonksiyonu
 void CommandParser::commandParser(const char *command, Client *client, Server *srv)
 {
     string commandString(command);
@@ -62,8 +57,6 @@ void CommandParser::commandParser(const char *command, Client *client, Server *s
     {
         return;
     }
-
-    // Satır sonu karakterlerini temizle
     commandString.erase(std::remove(commandString.begin(), commandString.end(), '\n'), commandString.end());
 
     vector<string> commandParts = splitString(commandString, " ");
@@ -72,7 +65,6 @@ void CommandParser::commandParser(const char *command, Client *client, Server *s
         return;
     }
 
-    // Komut adını al ve büyük harfe çevir
     for (size_t i = 0; i < commandParts[0].length(); ++i)
     {
         commandParts.at(0)[i] = toupper(commandParts.at(0)[i]);
@@ -81,10 +73,8 @@ void CommandParser::commandParser(const char *command, Client *client, Server *s
     handleCommand(client, commandParts, srv);
 }
 
-// CommandParser sınıfının komutları işleyen fonksiyonu
 void CommandParser::handleCommand(Client *client, vector<string> commandParts, Server *srv)
 {
-    // Komutları işle
     if (commandParts.size() < 1)
     {
         client->sendMessage(":" + client->getHostName() + " 461 " + client->getNickName() + " Command :Not enough parameters");
