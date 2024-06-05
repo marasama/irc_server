@@ -14,7 +14,7 @@ static void sendNoticeChannelMessage(Client *client, string channelName, string 
     }
 
     // Kanalın tüm kullanıcılarına NOTICE mesajını gönder
-    if (channel->getNoExternalMessages() == false)
+    if (channel->getNoExternalMessages() == false || channel->isUserOnChannel(client))
         channel->broadcastMessage(":" + client->getPrefix() + " NOTICE " + channelName + " :" + message);
     else
         client->sendReply(ERR_CANNOTSENDTOCHAN(client->getNickName(), channelName));

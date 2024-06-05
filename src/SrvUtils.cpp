@@ -77,7 +77,7 @@ void Server::clientDisconnect(int clientSocketFD)
         // İstemci haritasında istemci aranır ve bulunursa işlemler gerçekleştirilir.
         std::map<int, Client*>::iterator it = _clients.find(clientSocketFD);
         if (it == _clients.end()) {
-            write(STDOUT_FILENO, "Client not found for removal.\n", 30);
+            std::cout << "Client not found for removal.\n";
             return;
         }
 
@@ -99,7 +99,7 @@ void Server::clientDisconnect(int clientSocketFD)
     }
     catch (const std::exception &e)
     {
-        write(STDOUT_FILENO, e.what(), strlen(e.what()));
+        std::cout << e.what() << std::endl;
     }
 }
 
@@ -125,7 +125,7 @@ void Server::signalHandler(int signum)
 void Server::shutdownSrv()
 {
 	string outmessage = "Sunucu kapatılıyor...\n";
-	write(STDOUT_FILENO, outmessage.c_str(), outmessage.size());
+	std::cout <<  outmessage.c_str();
 
 	// Tüm istemciler için işlemler gerçekleştirilir.
 	for (std::map<int, Client*>::iterator it = _clients.begin(); it != _clients.end(); ++it) {
@@ -153,11 +153,6 @@ void Server::shutdownSrv()
 	}
 
 	FD_ZERO(&read_set);
-
-	// Bellekte sızıntı kontrolü yapılır.
-	//system("leaks ircserv"); //control c yapınca leaks bilgisi görmek istiyorsanız bunu açın
 	string outmessage2 = "Sunucu kapatıldı.\n";
-	write(STDOUT_FILENO, outmessage2.c_str(), outmessage2.size());
-
-	system("leaks ircserver");
+	std::cout << outmessage2.c_str();
 }

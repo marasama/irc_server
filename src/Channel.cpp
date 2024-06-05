@@ -94,7 +94,7 @@ void Channel::setUpModeChannel(Channel* channel, Client* client, string& mode, s
 {
 	if (!channel || !client)
 	{
-		write(2, "Channel or Client is null, cannot set mode.", 43);
+		std::cerr << "Channel or Client is null, cannot set mode.";
 		return;
 	}
 	if (client->isOperator() == false)
@@ -144,7 +144,7 @@ void Channel::setLowModeChannel(Channel* channel, Client* client, string& mode, 
 {
 	if (!channel || !client)
 	{
-		write(2, "Channel or Client is null, cannot set mode.", 43);
+		std::cerr << "Channel or Client is null, cannot set mode." << std::endl;
 		return;
 	}
 	if (client->isOperator() == false)

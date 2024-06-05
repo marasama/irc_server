@@ -50,8 +50,6 @@ Server::~Server()
 	if (_bot != NULL){
 		delete _bot;
 	}
-
-	system("leaks ircserver");
 }
 // Server soketini oluşturur.
 // Soketin dosya tanımlayıcısını döndürür.
@@ -198,7 +196,7 @@ void Server::serverRun()
 		// Bot oluşturulamazsa, hata mesajı yazdırılır.
 		delete _bot;
 		_bot = NULL;
-		write(STDOUT_FILENO, e.what(), strlen(e.what()));
+		std::cout << e.what() << std::endl;
 	}
 
 	// Ana döngü olayları dinler.

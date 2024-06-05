@@ -5,13 +5,13 @@
 int main(int argc, char *argv[])
 {
 	if (argc != 3) {
-		write(2, "Usage: ./server <port> <password>\n", 34);
+	std::cerr << "Usage: ./server <port> <password>\n";
 		return 1;
 	}
 
 	int port = std::atoi(argv[1]);
 	if (port <= 0 || port > 65535) {
-		write(2, "Invalid port\n", 13);
+		std::cerr << "Invalid port\n";
 		return 1;
 	}
 

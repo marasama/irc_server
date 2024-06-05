@@ -27,7 +27,7 @@ void Bot::connectServ()
 	host = gethostbyname(serv.c_str());
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
-		write(STDOUT_FILENO, "Error: Bot socket creation failed.\n", 34);
+		std::cout << "Error: Bot socket creation failed.\n";
 		exit(1);
 	}
 
@@ -38,13 +38,13 @@ void Bot::connectServ()
 
 	if (connect(sock, (struct sockaddr *)&server_addr, sizeof(struct sockaddr)) == -1)
 	{
-		write(STDOUT_FILENO, "Error: Bot socket connection failed.\n", 36);
+		std::cout << "Error: Bot socket connection failed.\n";
 		exit(1);
 	}
 
 	if (fcntl(sock, F_SETFL, O_NONBLOCK) == -1)
 	{
-		write(STDOUT_FILENO, "Error: Bot socket fcntl failed.\n", 32);
+		std::cout << "Error: Bot socket fcntl failed.\n";
 		exit(1);
 	}
 
@@ -68,12 +68,12 @@ void Bot::listen()
 	if (bytes_read < 0)
 	{
 		string errrecv = "Error in recv: " + string(strerror(errno)) + "\n";
-		write(STDOUT_FILENO, errrecv.c_str(), errrecv.length());
+		std::cout << errrecv.c_str(), errrecv.length();
 		return;
 	}
 	else if (bytes_read == 0)
 	{
-		write(STDOUT_FILENO, "Connection closed by peer.\n", 27);
+		std::cout << "Connection closed by peer.\n";
 		return;
 	}
 	buffer[bytes_read] = '\0';

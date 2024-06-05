@@ -64,7 +64,7 @@ void Client::setNickName(const string& nickName)
 	else
 	{
 		string error = "Invalid nickname: " + nickName;
-		write(2, error.c_str(), error.length());
+		std::cerr << error.c_str() << std::endl;
 	}
 }
 
@@ -76,7 +76,7 @@ void Client::setUserName(const string& userName)
 	else
 	{
 		string error = "Invalid username: " + userName;
-		write(2, error.c_str(), error.length());
+		std::cerr << error.c_str() << std::endl;
 	}
 }
 

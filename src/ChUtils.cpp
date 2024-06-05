@@ -21,13 +21,13 @@ void Server::removeChannel(const std::string& channelName)
 		else
 		{
 			string message = "Channel " + channelName + " is already null.";
-			write(STDOUT_FILENO, message.c_str(), message.size());
+			std::cout << message.c_str() << std::endl;
 		}
 	}
 	else
 	{
 		string message = "Channel " + channelName + " does not exist.";
-		write(STDOUT_FILENO, message.c_str(), message.size());
+		std::cout << message.c_str() << std::endl;
 	}
 }
 
@@ -62,7 +62,7 @@ void Server::removeClientFromAllChannels(Client* client)
 			if (channel->getChannelClientCount() == 0 && channelExists(channel->getChannelName()))
 			{
 				string message = "Channel " + channelName + " is empty, deleting.\n";
-				write(STDOUT_FILENO, message.c_str(), message.size());
+				std::cout << message.c_str();
 				removeChannel(channelName);
 			}
 		}

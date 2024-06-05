@@ -6,7 +6,7 @@ void User::user(Client *client, vector<string> commandParts, Server *srv)
     // client veya srv boş ise hata mesajı yazdır ve çık
     if (!client || !srv)
     {
-        write(2, "Error: client or srv is null\n", 29);
+        std::cerr << "Error: client or srv is null\n";
         return;
     }
 
