@@ -34,7 +34,6 @@ using namespace std;
 
 /* SERVER DEFINE */
 #define BACKLOG_SIZE 100
-#define MAX_CLIENTS 100
 
 /* CLIENT FAILED/ERROR MESSAGES */
 #define ERROR_SOCKET_SEND "Error while sending a message to a client!"

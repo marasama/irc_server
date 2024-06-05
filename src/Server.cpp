@@ -22,7 +22,6 @@ Server::Server(int serverSocketFamily, int serverSocketProtocol, int serverSocke
 	memset(&serverAddress, 0, sizeof(serverAddress));
 
 	FD_ZERO(&read_set);
-
 }
 
 // Server nesnesinin yıkıcısı.
@@ -43,7 +42,6 @@ Server::~Server()
 	// Server soketi kapatılır.
 	if (_serverSocketFD != -1)
 		close(_serverSocketFD);
-
 
 	FD_ZERO(&read_set);
 
@@ -98,13 +96,11 @@ void Server::socketInit()
 // AF_INET Bağlantı noktasını belirtmek için server soketinin adresini bağlar.
 void Server::socketBind()
 {
-
-			if (::bind(_serverSocketFD, reinterpret_cast<struct sockaddr*>(&serverAddress), sizeof(serverAddress)) == -1)
-			{
-				close(_serverSocketFD);
-				ErrorLogger(FAILED_SOCKET_BIND, __FILE__, __LINE__);
-			}
-
+	if (::bind(_serverSocketFD, reinterpret_cast<struct sockaddr*>(&serverAddress), sizeof(serverAddress)) == -1)
+	{
+		close(_serverSocketFD);
+		ErrorLogger(FAILED_SOCKET_BIND, __FILE__, __LINE__);
+	}
 }
 
 
@@ -115,10 +111,7 @@ void Server::socketListen()
 		close(_serverSocketFD);
 		ErrorLogger(FAILED_SOCKET_LISTEN, __FILE__, __LINE__);
 	}
-
 	FD_SET(_serverSocketFD, &read_set);
-
-	
 }
 
 

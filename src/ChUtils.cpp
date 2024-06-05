@@ -38,7 +38,6 @@ void Server::removeClientFromAllChannels(Client* client)
 	if (client == NULL || !client->isSocketOpen())
 		return;
 
-	// İstemcinin bulunduğu tüm kanalların bir kopyasını oluşturun ve istemciyi kanallardan kaldırın.
 	std::vector<Channel*> channels = client->getChannel();
 	while (!channels.empty())
 	{

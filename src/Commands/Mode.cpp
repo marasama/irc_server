@@ -23,18 +23,15 @@ void Mode::mode(Client *client, vector<string> commandParts, Server *srv)
     }
     else if (atargetE.at(0) == '#')
     {
-        // Kanal hedefi ise
         string atarget = atrim(atargetE);
         Channel *channel = srv->getChannel(atarget);
 
-        // Kanal bulunamazsa hata mesajı gönder
         if (!channel)
         {
             client->sendMessage(":" + client->getHostName() + " 403 " + client->getNickName() + " " + atargetE + " :No such channel\r\n");
             return;
         }
 
-        // Mod boşsa veya modun ilk karakteri '+' değilse hata mesajı gönder
         if (mode.empty())
             return;
         if (mode.at(0) == '+')

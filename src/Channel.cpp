@@ -42,7 +42,7 @@ void Channel::addClient(Client* client)
 	_clients.push_back(client);
 }
 
-// Kanaldan istemciyi kaldıran fonksiyon
+
 void Channel::removeUserFromChannel(Client* client)
 {
 	for (vector<Client*>::iterator it = _clients.begin(); it != _clients.end(); ++it)
@@ -53,8 +53,6 @@ void Channel::removeUserFromChannel(Client* client)
 			break;
 		}
 	}
-
-	// Kanal sahibi bir operatörse ve operatör olan tek kişi çıkarsa, yeni bir operatör belirle.
 	if (client->isOperator() == true)
 	{
 		client->setOperator(false);
@@ -201,16 +199,3 @@ std::vector<std::string> Channel::getChannelClientNickNames() const
 	return nickNames;
 }
 
-// Kanaldaki mevcut istemcilerin nickName'lerini içeren bir stringi döndüren fonksiyon
-string Channel::getExistingUsersNickList() const
-{
-	string nickList;
-	for (std::vector<Client*>::const_iterator it = _clients.begin(); it != _clients.end(); ++it)
-	{
-		if (it != _clients.begin())
-			nickList += " ";
-
-		nickList += (*it)->getNickName();
-	}
-	return nickList;
-}
